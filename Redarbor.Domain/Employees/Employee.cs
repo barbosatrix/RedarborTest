@@ -1,6 +1,6 @@
 ﻿using Ardalis.GuardClauses;
 
-namespace RedArbor.Domain.Employees
+namespace Redarbor.Domain.Employees
 {
     public class Employee
     {
