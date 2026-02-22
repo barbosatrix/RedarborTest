@@ -1,8 +1,6 @@
-﻿using MediatR;
-
-namespace Redarbor.Application.Employees.Commands
+﻿namespace Redarbor.Api.Contracts.Employees
 {
-    public sealed record CreateEmployeeCommand(
+    public sealed record CreateEmployeeRequest(
         int CompanyId,
         DateTime CreatedOn,
         DateTime? DeletedOn,
@@ -17,5 +15,5 @@ namespace Redarbor.Application.Employees.Commands
         string? Telephone,
         DateTime? UpdatedOn,
         string Username
-    ) : IRequest<int>;
+    );
 }

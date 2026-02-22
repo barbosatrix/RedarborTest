@@ -15,16 +15,16 @@ namespace Redarbor.Domain.Employees
         public int StatusId { get; private set; }
         public string Username { get; private set; } = default!;
 
-        // Optional (según JSON)
+        // Optional
         public DateTime CreatedOn { get; private set; }
-        public DateTime? DeletedOn { get; private set; }
-        public string? Fax { get; private set; }
-        public string? Name { get; private set; }
-        public DateTime? Lastlogin { get; private set; }
-        public string? Telephone { get; private set; }
         public DateTime? UpdatedOn { get; private set; }
+        public DateTime? DeletedOn { get; private set; }
+        public DateTime? Lastlogin { get; private set; }
+        public string? Name { get; private set; }
+        public string? Fax { get; private set; }
+        public string? Telephone { get; private set; }
 
-        private Employee() { } // EF Core
+        private Employee() { } // EF
 
         private Employee(
             int companyId,
@@ -33,16 +33,8 @@ namespace Redarbor.Domain.Employees
             int portalId,
             int roleId,
             int statusId,
-            string username,
-            DateTime? createdOn = null,
-            DateTime? updatedOn = null,
-            DateTime? lastLogin = null,
-            DateTime? deletedOn = null,
-            string? name = null,
-            string? fax = null,
-            string? telephone = null)
+            string username)
         {
-            // Required
             CompanyId = Guard.Against.Zero(companyId, nameof(companyId));
             Email = Guard.Against.NullOrWhiteSpace(email, nameof(email)).Trim();
             Password = Guard.Against.NullOrWhiteSpace(password, nameof(password));
@@ -51,18 +43,15 @@ namespace Redarbor.Domain.Employees
             StatusId = Guard.Against.Zero(statusId, nameof(statusId));
             Username = Guard.Against.NullOrWhiteSpace(username, nameof(username)).Trim();
 
-            // Optional
-            CreatedOn = createdOn ?? DateTime.UtcNow;
-            UpdatedOn = updatedOn;
-            Lastlogin = lastLogin;
-            DeletedOn = deletedOn;
+            var now = DateTime.UtcNow;
+            CreatedOn = now;
+            UpdatedOn = now;
 
-            Name = NormalizeNullable(name);
-            Fax = NormalizeNullable(fax);
-            Telephone = NormalizeNullable(telephone);
+            DeletedOn = null;
+            Lastlogin = null;
         }
 
-        // Factory
+        // ✅ Factory: el dominio decide fechas/estado inicial
         public static Employee Create(
             int companyId,
             string email,
@@ -71,27 +60,19 @@ namespace Redarbor.Domain.Employees
             int roleId,
             int statusId,
             string username,
-            DateTime? createdOn = null,
-            DateTime? updatedOn = null,
-            DateTime? lastLogin = null,
-            DateTime? deletedOn = null,
             string? name = null,
             string? fax = null,
             string? telephone = null)
-            => new Employee(
-                companyId, email, password, portalId, roleId, statusId, username,
-                createdOn, updatedOn, lastLogin, deletedOn, name, fax, telephone);
+        {
+            var employee = new Employee(companyId, email, password, portalId, roleId, statusId, username);
+            employee.SetOptionalData(name, fax, telephone);
+            return employee;
+        }
 
-        // Updates (DDD: cambios controlados)
+        // ✅ Updates controlados
         public void UpdateUsername(string username)
         {
             Username = Guard.Against.NullOrWhiteSpace(username, nameof(username)).Trim();
-            Touch();
-        }
-
-        public void UpdateName(string? name)
-        {
-            Name = NormalizeNullable(name);
             Touch();
         }
 
@@ -115,19 +96,26 @@ namespace Redarbor.Domain.Employees
             Touch();
         }
 
-        // “Opcionales en bloque” (útil para PUT)
-        public void SetOptionalData(string? fax, string? telephone, DateTime? lastLogin)
+        // ✅ Opcionales
+        public void SetOptionalData(string? name, string? fax, string? telephone)
         {
+            Name = NormalizeNullable(name);
             Fax = NormalizeNullable(fax);
             Telephone = NormalizeNullable(telephone);
-            Lastlogin = lastLogin;
             Touch();
         }
 
-        // Soft delete
-        public void MarkAsDeleted(DateTime? deletedOn = null)
+        // ✅ Soft delete
+        public void MarkAsDeleted()
         {
-            DeletedOn = deletedOn ?? DateTime.UtcNow;
+            if (DeletedOn is not null) return;
+            DeletedOn = DateTime.UtcNow;
+            Touch();
+        }
+
+        public void RegisterLogin(DateTime? when = null)
+        {
+            Lastlogin = when ?? DateTime.UtcNow;
             Touch();
         }
 

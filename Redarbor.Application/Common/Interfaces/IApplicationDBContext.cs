@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Redarbor.Application.Common.Interfaces
 {
-    public interface IApplicationDBContext
+    public interface IApplicationDbContext
     {
         DbSet<Employee> Employees { get; }
 

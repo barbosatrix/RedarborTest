@@ -4,7 +4,7 @@ using Redarbor.Domain.Employees;
 
 namespace Redarbor.Infrastructure.Persistence
 {
-    public class ApplicationDbContext : DbContext, IApplicationDBContext
+    public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
         public DbSet<Employee> Employees => Set<Employee>();
 
