@@ -10,7 +10,7 @@ builder.Configuration.AddEnvironmentVariables();
 // Configuración y servicios de infraestructura
 builder.Services.AddInfrastructure(builder.Configuration);
 
-// Servicios de Application (MediatR, FluentValidation, etc.)
+// Servicios de Application (MediaTr, FluentValidation, etc.)
 builder.Services.AddApplication();
 
 // Controllers 

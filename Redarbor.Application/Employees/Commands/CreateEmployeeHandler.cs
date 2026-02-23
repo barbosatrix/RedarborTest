@@ -4,12 +4,8 @@ using Redarbor.Domain.Employees;
 
 namespace Redarbor.Application.Employees.Commands
 {
-    public sealed class CreateEmployeeHandler : IRequestHandler<CreateEmployeeCommand, int>
+    public sealed class CreateEmployeeHandler(IApplicationDbContext db) : IRequestHandler<CreateEmployeeCommand, int>
     {
-        private readonly IApplicationDbContext _db;
-
-        public CreateEmployeeHandler(IApplicationDbContext db) => _db = db;
-
         public async Task<int> Handle(CreateEmployeeCommand request, CancellationToken ct)
         {
             var employee = Employee.Create(
@@ -25,8 +21,8 @@ namespace Redarbor.Application.Employees.Commands
                 telephone: request.Telephone
             );
 
-            _db.Employees.Add(employee);
-            await _db.SaveChangesAsync(ct);
+            db.Employees.Add(employee);
+            await db.SaveChangesAsync(ct);
 
             return employee.Id;
         }
