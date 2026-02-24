@@ -5,10 +5,6 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redarbor.Api", "Redarbor.Api\Redarbor.Api.csproj", "{9B53BC2F-9CBC-E6BB-0D1E-0720ED17518E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redarbor.Domain", "Redarbor.Domain\Redarbor.Domain.csproj", "{356D601D-102E-3818-05C1-DE891029CD5D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redarbor.Infrastructure", "Redarbor.Infrastructure\Redarbor.Infrastructure.csproj", "{AA15F435-3D95-0154-6941-CAD257BEFBDD}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redarbor.UnitTests", "Readarbor.UniTests\Redarbor.UnitTests.csproj", "{46B88E4B-856C-6828-414F-85812219DA12}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redarbor.Application", "Redarbor.Application\Redarbor.Application.csproj", "{20E5F2B1-F9A0-7200-289F-B147E1CCF745}"
@@ -19,7 +15,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la solución",
 		.env.example = .env.example
 		docker-compose.example.yml = docker-compose.example.yml
 		docker-compose.yml = docker-compose.yml
+		Dockerfile = Dockerfile
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedArbor.Infrastructure", "Redarbor.Infrastructure\RedArbor.Infrastructure.csproj", "{AA15F435-3D95-0154-6941-CAD257BEFBDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedArbor.Domain", "Redarbor.Domain\RedArbor.Domain.csproj", "{356D601D-102E-3818-05C1-DE891029CD5D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,14 +32,6 @@ Global
 		{9B53BC2F-9CBC-E6BB-0D1E-0720ED17518E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B53BC2F-9CBC-E6BB-0D1E-0720ED17518E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B53BC2F-9CBC-E6BB-0D1E-0720ED17518E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{356D601D-102E-3818-05C1-DE891029CD5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{356D601D-102E-3818-05C1-DE891029CD5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{356D601D-102E-3818-05C1-DE891029CD5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{356D601D-102E-3818-05C1-DE891029CD5D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AA15F435-3D95-0154-6941-CAD257BEFBDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AA15F435-3D95-0154-6941-CAD257BEFBDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AA15F435-3D95-0154-6941-CAD257BEFBDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AA15F435-3D95-0154-6941-CAD257BEFBDD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{46B88E4B-856C-6828-414F-85812219DA12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{46B88E4B-856C-6828-414F-85812219DA12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46B88E4B-856C-6828-414F-85812219DA12}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -47,6 +40,14 @@ Global
 		{20E5F2B1-F9A0-7200-289F-B147E1CCF745}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20E5F2B1-F9A0-7200-289F-B147E1CCF745}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20E5F2B1-F9A0-7200-289F-B147E1CCF745}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA15F435-3D95-0154-6941-CAD257BEFBDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA15F435-3D95-0154-6941-CAD257BEFBDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA15F435-3D95-0154-6941-CAD257BEFBDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA15F435-3D95-0154-6941-CAD257BEFBDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{356D601D-102E-3818-05C1-DE891029CD5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{356D601D-102E-3818-05C1-DE891029CD5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{356D601D-102E-3818-05C1-DE891029CD5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{356D601D-102E-3818-05C1-DE891029CD5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
