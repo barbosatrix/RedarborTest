@@ -10,19 +10,16 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        // Aquí luego registraremos:
-
+        // DbContext
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
         services.AddScoped<IApplicationDbContext>(sp =>
             sp.GetRequiredService<ApplicationDbContext>());
 
-        // DbContext
         // Repositorios
-        // Dapper
-        // etc.
-
+        services.AddScoped<IEmployeeReadRepository, EmployeeReadRepository>();
+        
         return services;
     }
 }
