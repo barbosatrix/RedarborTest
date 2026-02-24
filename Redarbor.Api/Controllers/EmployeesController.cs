@@ -3,32 +3,32 @@ using Microsoft.AspNetCore.Mvc;
 using Redarbor.Api.Contracts.Employees;
 using Redarbor.Application.Common.Interfaces;
 using Redarbor.Application.Employees.Commands;
+using Redarbor.Application.Employees.Queries;
 
 namespace Redarbor.Api.Controllers;
 
 [ApiController]
 [Microsoft.AspNetCore.Mvc.Route("api/redarbor")]
-public sealed class EmployeesController(IMediator mediator, IEmployeeReadRepository employeeReadRepository) : ControllerBase
+public sealed class EmployeesController(IMediator mediator) : ControllerBase
 {
-    // GET /api/redarbor
+
     [HttpGet]
     public async Task<IActionResult> GetAllEmployees(CancellationToken ct)
     {
-        var employees = await employeeReadRepository.GetAllAsync(ct);
-
-        var response = employees.Select(EmployeeResponse.FromDomain);
-
-        return Ok(response);
+        var result = await mediator.Send(new GetEmployeesQuery(), ct);
+        return Ok(result);
     }
 
     //GET /api/redarbor/{id}
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetEmployeeById(int id, CancellationToken ct)
     {
-        var employee = await employeeReadRepository.GetByIdAsync(id, ct);
-        if (employee is null) return NotFound();
-        var response = EmployeeResponse.FromDomain(employee);
-        return Ok(response);
+        var result = await mediator.Send(new GetEmployeeByIdQuery(id), ct);
+
+        if (result is null)
+            return NotFound();
+
+        return Ok(result);
     }
 
     //Post employee (create new employee)
