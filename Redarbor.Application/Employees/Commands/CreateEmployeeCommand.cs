@@ -4,18 +4,14 @@ namespace Redarbor.Application.Employees.Commands
 {
     public sealed record CreateEmployeeCommand(
         int CompanyId,
-        DateTime CreatedOn,
-        DateTime? DeletedOn,
         string Email,
         string? Fax,
         string? Name,
-        DateTime? Lastlogin,
         string Password,
         int PortalId,
         int RoleId,
         int StatusId,
         string? Telephone,
-        DateTime? UpdatedOn,
         string Username
     ) : IRequest<int>;
 }
