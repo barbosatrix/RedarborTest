@@ -1,10 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Redarbor.Application.Common.Interfaces;
 using Redarbor.Application.Employees.Commands;
 using Redarbor.Infrastructure.Persistence;
-using Xunit;
 
-namespace Redarbot.Tests.Application.Employees;
+namespace Redarbor.UnitTests.Application.Employees;
 
 public class CreateEmployeeHandlerTests
 {
@@ -13,7 +11,7 @@ public class CreateEmployeeHandlerTests
     {
         // Arrange: DbContext InMemory aislado por test
         var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-            .UseInMemoryDatabase(databaseName: $"redarbot-tests-{Guid.NewGuid()}")
+            .UseInMemoryDatabase(databaseName: $"redarbor-tests-{Guid.NewGuid()}")
             .Options;
 
         await using var db = new ApplicationDbContext(options);
