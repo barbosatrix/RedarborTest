@@ -16,7 +16,7 @@ services:
   api:
     build:
       context: .
-      dockerfile: Redarbor.Api/Dockerfile
+      dockerfile: Dockerfile
     container_name: redarbor-api
     environment:
       ASPNETCORE_ENVIRONMENT: "Development"
